@@ -1,0 +1,41 @@
+
+
+a.) I will be using Dynamic Programming as I will be relying on previous subsequent strings that are partially part of the word
+we are finding occurences of
+
+PSEUDOCODE
+
+INPUT NUMBER OF TEST CASES
+FOR EVERY TEST CASE:
+    INPUT VALUES FOR x AND z
+    output = COUNT(x, z)
+    PRINT output
+
+COUNT(x, z)
+    m = LENGTH(x)
+    n = LENGTH(z)
+    
+    CREATE dp TABLE WITH (m+1) ROWS AND (n+1) COLUMNS INITIALIZED TO 0
+    
+    FOR i FROM 0 TO m:
+        dp[i][0] = 1
+    
+    FOR i FROM 1 TO m:
+        FOR j FROM 1 TO n:
+            IF x[i-1] EQUALS z[j-1] THEN:
+                dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
+            ELSE:
+                dp[i][j] = dp[i-1][j]
+    
+    RETURN dp[m][n]
+d.)
+Time Complexity
+Case	Complexity	Explanation
+Best Case	O(m × n)	The algorithm must fill every cell in the DP table regardless of input. Even if Z is empty (n=0), we still need O(m) time to set base cases.
+Worst Case	O(m × n)	The nested loops always run (m × n) times. Character comparisons and additions are constant time operations.
+Average Case	O(m × n)	No early termination possible. The entire table must be computed.
+Where:
+
+m = length of string X
+
+n = length of string Z
